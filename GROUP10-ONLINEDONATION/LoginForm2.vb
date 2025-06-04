@@ -21,14 +21,13 @@ Public Class LoginForm2
                 Dim query As String = "SELECT full_name FROM users WHERE email = @Email AND password_hash = @Password"
                 Using cmd As New SqlCommand(query, conn)
                     cmd.Parameters.AddWithValue("@Email", email)
-                    cmd.Parameters.AddWithValue("@Password", password) ' Replace with hashed if needed
+                    cmd.Parameters.AddWithValue("@Password", password)
 
                     Dim reader As SqlDataReader = cmd.ExecuteReader()
                     If reader.HasRows Then
                         reader.Read()
                         MessageBox.Show("Welcome, " & reader("full_name").ToString() & "!", "Success")
-                        ' Me.Hide()
-                        ' New MainForm().Show()
+
                     Else
                         MessageBox.Show("Invalid email or password.")
                     End If
