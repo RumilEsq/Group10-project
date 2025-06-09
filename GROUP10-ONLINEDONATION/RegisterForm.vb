@@ -1,22 +1,10 @@
-﻿Imports Microsoft.Data.SqlClient
-Imports System.Data.SqlClient
-Imports System.Security.Cryptography
-Imports System.Text
+﻿Imports System.Data.SqlClient
 
 Public Class RegisterForm
 
-    Private Function SystemSecurityCrypographySHA256HashData(rawData As String) As String
-        Using sha256Hash As SHA256 = SHA256.Create()
-            Dim bytes As Byte() = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData))
-            Dim builder As New StringBuilder()
-            For Each b In bytes
-                builder.Append(b.ToString("x2"))
-            Next
-            Return builder.ToString()
-        End Using
-    End Function
 
     Private Sub RegisterButton_Click(sender As Object, e As EventArgs) Handles RegisterButton.Click
+
         Dim fullName = FullNameTextBox.Text.Trim()
         Dim email = EmailTextBox.Text.Trim()
         Dim password = PasswordTextBox.Text
@@ -32,28 +20,34 @@ Public Class RegisterForm
             Return
         End If
 
-        Dim passwordHash = SystemSecurityCrypographySHA256HashData(password)
-
         Dim connectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\USERS\RUMIL\ONEDRIVE\DESKTOP\DATABASE.MDF;Integrated Security=True"
-        Dim conn As New SqlConnection(connectionString)
-        conn.Open()
-        Dim query = "INSERT INTO users (role_id, full_name, email, password_hash) VALUES (1, @FullName, @Email, @PasswordHash)"
-        Using cmd As New SqlCommand(query, conn)
-            cmd.Parameters.AddWithValue("@FullName", fullName)
-            cmd.Parameters.AddWithValue("@Email", email)
-            cmd.Parameters.AddWithValue("@PasswordHash", passwordHash)
+        Using conn As New SqlConnection(connectionString)
             Try
-                cmd.ExecuteNonQuery()
-                MessageBox.Show("Registration successful!")
-                Me.Close()
-            Catch ex As SqlException
-                MessageBox.Show("Error: " & ex.Message)
-                End Try
-            End Using
+                conn.Open()
 
+                Dim query As String = "INSERT INTO users (role_id, full_name, email, password) VALUES (@RoleID, @FullName, @Email, @Password)"
+                Using cmd As New SqlCommand(query, conn)
+                    cmd.Parameters.AddWithValue("@RoleID", 1)
+                    cmd.Parameters.AddWithValue("@FullName", fullName)
+                    cmd.Parameters.AddWithValue("@Email", email)
+                    cmd.Parameters.AddWithValue("@Password", password)
+
+                    cmd.ExecuteNonQuery()
+                    MessageBox.Show("Registration successful!")
+                    Me.Close()
+                End Using
+
+            Catch ex As SqlException
+                MessageBox.Show("Database error: " & ex.Message)
+            End Try
+        End Using
     End Sub
 
     Private Sub CancelButton_Click(sender As Object, e As EventArgs) Handles CancelButton.Click
         Me.Close()
     End Sub
+
+    Private Sub FullNameTextBox_TextChanged(sender As Object, e As EventArgs) Handles FullNameTextBox.TextChanged
+    End Sub
+
 End Class

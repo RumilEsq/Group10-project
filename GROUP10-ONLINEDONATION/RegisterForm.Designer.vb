@@ -80,7 +80,7 @@ Partial Class RegisterForm
         ' RegisterForm
         ' 
         AcceptButton = RegisterButton
-        ClientSize = New Size(688, 278)
+        ClientSize = New Size(289, 278)
         Controls.Add(FullNameTextBox)
         Controls.Add(EmailTextBox)
         Controls.Add(PasswordTextBox)

@@ -1,5 +1,5 @@
-Imports System.Data.SqlClient
 Imports System.Configuration
+Imports System.Data.SqlClient
 
 Public Class LoginForm2
 
@@ -12,31 +12,33 @@ Public Class LoginForm2
             Return
         End If
 
-        Dim connStr As String = ConfigurationManager.ConnectionStrings("MyConnectionString").ConnectionString
+        Try
+            Dim connStr As String = ConfigurationManager.ConnectionStrings("MyConnectionString").ConnectionString
 
-        Using conn As New SqlConnection(connStr)
-            Try
+            Using conn As New SqlConnection(connStr)
                 conn.Open()
 
-                Dim query As String = "SELECT full_name FROM users WHERE email = @Email AND password_hash = @Password"
+                Dim query As String = "SELECT COUNT(*) FROM users WHERE email = @Email AND password = @Password"
                 Using cmd As New SqlCommand(query, conn)
                     cmd.Parameters.AddWithValue("@Email", email)
                     cmd.Parameters.AddWithValue("@Password", password)
 
-                    Dim reader As SqlDataReader = cmd.ExecuteReader()
-                    If reader.HasRows Then
-                        reader.Read()
-                        MessageBox.Show("Welcome, " & reader("full_name").ToString() & "!", "Success")
+                    Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
 
+                    If count > 0 Then
+
+                        Dim dashboard As New DashboardForm()
+                        dashboard.Show()
+                        Me.Hide()
                     Else
-                        MessageBox.Show("Invalid email or password.")
+                        MessageBox.Show("Invalid email or password. Please try again.")
                     End If
                 End Using
+            End Using
 
-            Catch ex As Exception
-                MessageBox.Show("Database error: " & ex.Message)
-            End Try
-        End Using
+        Catch ex As Exception
+            MessageBox.Show("Database error: " & ex.Message)
+        End Try
     End Sub
 
     Private Sub Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel.Click
@@ -44,12 +46,11 @@ Public Class LoginForm2
     End Sub
 
     Private Sub LoginForm2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        UsernameTextBox.Select()
     End Sub
 
     Private Sub RegisterButton_Click(sender As Object, e As EventArgs) Handles RegisterButton.Click
         Dim regForm As New RegisterForm()
         regForm.ShowDialog()
-
     End Sub
 End Class

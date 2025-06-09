@@ -31,6 +31,7 @@ Partial Class LoginForm2
     ' Initialize form and controls
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LoginForm2))
         UsernameLabel = New Label()
         PasswordLabel = New Label()
         UsernameTextBox = New TextBox()
@@ -39,11 +40,13 @@ Partial Class LoginForm2
         Cancel = New Button()
         LoginText = New Label()
         RegisterButton = New Button()
+        PictureBox1 = New PictureBox()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' UsernameLabel
         ' 
-        UsernameLabel.Location = New Point(217, 24)
+        UsernameLabel.Location = New Point(127, 157)
         UsernameLabel.Name = "UsernameLabel"
         UsernameLabel.Size = New Size(220, 23)
         UsernameLabel.TabIndex = 0
@@ -52,7 +55,7 @@ Partial Class LoginForm2
         ' 
         ' PasswordLabel
         ' 
-        PasswordLabel.Location = New Point(217, 81)
+        PasswordLabel.Location = New Point(127, 220)
         PasswordLabel.Name = "PasswordLabel"
         PasswordLabel.Size = New Size(220, 23)
         PasswordLabel.TabIndex = 2
@@ -61,14 +64,14 @@ Partial Class LoginForm2
         ' 
         ' UsernameTextBox
         ' 
-        UsernameTextBox.Location = New Point(217, 50)
+        UsernameTextBox.Location = New Point(127, 183)
         UsernameTextBox.Name = "UsernameTextBox"
         UsernameTextBox.Size = New Size(220, 23)
         UsernameTextBox.TabIndex = 1
         ' 
         ' PasswordTextBox
         ' 
-        PasswordTextBox.Location = New Point(217, 107)
+        PasswordTextBox.Location = New Point(127, 246)
         PasswordTextBox.Name = "PasswordTextBox"
         PasswordTextBox.PasswordChar = "*"c
         PasswordTextBox.Size = New Size(220, 23)
@@ -76,9 +79,9 @@ Partial Class LoginForm2
         ' 
         ' OK
         ' 
-        OK.Location = New Point(217, 161)
+        OK.Location = New Point(127, 293)
         OK.Name = "OK"
-        OK.Size = New Size(94, 23)
+        OK.Size = New Size(94, 36)
         OK.TabIndex = 4
         OK.Text = "Login"
         OK.UseVisualStyleBackColor = True
@@ -86,9 +89,9 @@ Partial Class LoginForm2
         ' Cancel
         ' 
         Cancel.DialogResult = DialogResult.Cancel
-        Cancel.Location = New Point(343, 161)
+        Cancel.Location = New Point(253, 293)
         Cancel.Name = "Cancel"
-        Cancel.Size = New Size(94, 23)
+        Cancel.Size = New Size(94, 36)
         Cancel.TabIndex = 5
         Cancel.Text = "Cancel"
         Cancel.UseVisualStyleBackColor = True
@@ -96,7 +99,7 @@ Partial Class LoginForm2
         ' LoginText
         ' 
         LoginText.Font = New Font("Sitka Small", 27.75F, FontStyle.Bold)
-        LoginText.Location = New Point(27, 52)
+        LoginText.Location = New Point(180, 68)
         LoginText.Name = "LoginText"
         LoginText.Size = New Size(139, 78)
         LoginText.TabIndex = 6
@@ -105,20 +108,30 @@ Partial Class LoginForm2
         ' 
         ' RegisterButton
         ' 
-        RegisterButton.Location = New Point(217, 213)
+        RegisterButton.Location = New Point(127, 369)
         RegisterButton.Name = "RegisterButton"
-        RegisterButton.Size = New Size(220, 23)
+        RegisterButton.Size = New Size(220, 39)
         RegisterButton.TabIndex = 6
         RegisterButton.Text = "Register"
         RegisterButton.UseVisualStyleBackColor = True
         ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
+        PictureBox1.Location = New Point(429, -209)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(100, 782)
+        PictureBox1.TabIndex = 7
+        PictureBox1.TabStop = False
+        ' 
         ' LoginForm2
         ' 
         AcceptButton = OK
-        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = Cancel
-        ClientSize = New Size(640, 338)
+        ClientSize = New Size(524, 527)
+        Controls.Add(PictureBox1)
         Controls.Add(RegisterButton)
         Controls.Add(LoginText)
         Controls.Add(Cancel)
@@ -134,6 +147,7 @@ Partial Class LoginForm2
         SizeGripStyle = SizeGripStyle.Hide
         StartPosition = FormStartPosition.CenterParent
         Text = "Login"
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
 
@@ -143,5 +157,6 @@ Partial Class LoginForm2
     End Sub
 
     Friend WithEvents RegisterButton As Button
+    Friend WithEvents PictureBox1 As PictureBox
 
 End Class
