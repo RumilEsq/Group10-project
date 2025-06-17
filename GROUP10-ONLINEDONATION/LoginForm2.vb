@@ -1,4 +1,4 @@
-Imports System.Configuration
+﻿Imports System.Configuration
 Imports System.Data.SqlClient
 
 Public Class LoginForm2
@@ -18,21 +18,22 @@ Public Class LoginForm2
             Using conn As New SqlConnection(connStr)
                 conn.Open()
 
-                Dim query As String = "SELECT COUNT(*) FROM users WHERE email = @Email AND password = @Password"
+                Dim query As String = "SELECT user_id FROM users WHERE email = @Email AND password = @Password"
                 Using cmd As New SqlCommand(query, conn)
                     cmd.Parameters.AddWithValue("@Email", email)
                     cmd.Parameters.AddWithValue("@Password", password)
 
-                    Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
-
-                    If count > 0 Then
-
-                        Dim dashboard As New DashboardForm()
-                        dashboard.Show()
-                        Me.Hide()
-                    Else
-                        MessageBox.Show("Invalid email or password. Please try again.")
-                    End If
+                    Using reader As SqlDataReader = cmd.ExecuteReader()
+                        If reader.Read() Then
+                            Dim userId As Integer = Convert.ToInt32(reader("user_id"))
+                            Dim dashboard As New DashboardForm()
+                            dashboard.LoggedInUserID = userId
+                            dashboard.Show()
+                            Me.Hide()
+                        Else
+                            MessageBox.Show("Invalid email or password. Please try again.")
+                        End If
+                    End Using
                 End Using
             End Using
 
@@ -53,4 +54,6 @@ Public Class LoginForm2
         Dim regForm As New RegisterForm()
         regForm.ShowDialog()
     End Sub
+
+
 End Class
