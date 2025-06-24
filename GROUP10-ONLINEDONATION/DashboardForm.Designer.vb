@@ -19,6 +19,7 @@ Partial Class DashboardForm
 
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DashboardForm))
         LabelWelcome = New Label()
         LogoutButton = New Button()
         DonateButton = New Button()
@@ -54,12 +55,15 @@ Partial Class DashboardForm
         ' LabelWelcome
         ' 
         LabelWelcome.AutoSize = True
-        LabelWelcome.Font = New Font("Unispace", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        LabelWelcome.Location = New Point(378, 9)
+        LabelWelcome.BackColor = Color.Transparent
+        LabelWelcome.FlatStyle = FlatStyle.Flat
+        LabelWelcome.Font = New Font("Microsoft Sans Serif", 26.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelWelcome.ImageAlign = ContentAlignment.TopLeft
+        LabelWelcome.Location = New Point(12, 12)
         LabelWelcome.Name = "LabelWelcome"
-        LabelWelcome.Size = New Size(454, 23)
+        LabelWelcome.Size = New Size(689, 39)
         LabelWelcome.TabIndex = 0
-        LabelWelcome.Text = "Welcome to the Online Donation System"
+        LabelWelcome.Text = "Welcome to the Online Donation System!"
         ' 
         ' LogoutButton
         ' 
@@ -73,7 +77,7 @@ Partial Class DashboardForm
         ' DonateButton
         ' 
         DonateButton.BackColor = Color.LightYellow
-        DonateButton.Location = New Point(140, 56)
+        DonateButton.Location = New Point(124, 101)
         DonateButton.Name = "DonateButton"
         DonateButton.Size = New Size(121, 37)
         DonateButton.TabIndex = 2
@@ -83,6 +87,7 @@ Partial Class DashboardForm
         ' DonatePanel
         ' 
         DonatePanel.BackColor = SystemColors.ActiveCaption
+        DonatePanel.BackgroundImage = CType(resources.GetObject("DonatePanel.BackgroundImage"), Image)
         DonatePanel.Controls.Add(Label4)
         DonatePanel.Controls.Add(Label3)
         DonatePanel.Controls.Add(Label2)
@@ -90,7 +95,7 @@ Partial Class DashboardForm
         DonatePanel.Controls.Add(AmountTextBox)
         DonatePanel.Controls.Add(PaymentMethodComboBox)
         DonatePanel.Controls.Add(CampaignComboBox)
-        DonatePanel.Location = New Point(47, 99)
+        DonatePanel.Location = New Point(42, 152)
         DonatePanel.Name = "DonatePanel"
         DonatePanel.Size = New Size(286, 331)
         DonatePanel.TabIndex = 3
@@ -98,6 +103,7 @@ Partial Class DashboardForm
         ' Label4
         ' 
         Label4.AutoSize = True
+        Label4.BackColor = Color.Transparent
         Label4.Location = New Point(29, 168)
         Label4.Name = "Label4"
         Label4.Size = New Size(51, 15)
@@ -107,6 +113,7 @@ Partial Class DashboardForm
         ' Label3
         ' 
         Label3.AutoSize = True
+        Label3.BackColor = Color.Transparent
         Label3.Location = New Point(6, 108)
         Label3.Name = "Label3"
         Label3.Size = New Size(99, 15)
@@ -116,6 +123,7 @@ Partial Class DashboardForm
         ' Label2
         ' 
         Label2.AutoSize = True
+        Label2.BackColor = Color.Transparent
         Label2.Location = New Point(29, 53)
         Label2.Name = "Label2"
         Label2.Size = New Size(62, 15)
@@ -124,7 +132,7 @@ Partial Class DashboardForm
         ' 
         ' SubmitDonationButton
         ' 
-        SubmitDonationButton.Font = New Font("Unispace", 11.9999981F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        SubmitDonationButton.Font = New Font("Microsoft Sans Serif", 11.9999981F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         SubmitDonationButton.Location = New Point(29, 252)
         SubmitDonationButton.Name = "SubmitDonationButton"
         SubmitDonationButton.Size = New Size(230, 40)
@@ -158,7 +166,7 @@ Partial Class DashboardForm
         ' CreateCampaignButton
         ' 
         CreateCampaignButton.BackColor = Color.LightYellow
-        CreateCampaignButton.Location = New Point(482, 58)
+        CreateCampaignButton.Location = New Point(478, 101)
         CreateCampaignButton.Name = "CreateCampaignButton"
         CreateCampaignButton.Size = New Size(121, 37)
         CreateCampaignButton.TabIndex = 5
@@ -168,6 +176,7 @@ Partial Class DashboardForm
         ' CampaignPanel
         ' 
         CampaignPanel.BackColor = SystemColors.ActiveCaption
+        CampaignPanel.BackgroundImage = CType(resources.GetObject("CampaignPanel.BackgroundImage"), Image)
         CampaignPanel.Controls.Add(Label11)
         CampaignPanel.Controls.Add(Label10)
         CampaignPanel.Controls.Add(Label9)
@@ -182,7 +191,7 @@ Partial Class DashboardForm
         CampaignPanel.Controls.Add(GoalAmountTextBox)
         CampaignPanel.Controls.Add(DescriptionTextBox)
         CampaignPanel.Controls.Add(TitleTextBox)
-        CampaignPanel.Location = New Point(390, 101)
+        CampaignPanel.Location = New Point(390, 152)
         CampaignPanel.Name = "CampaignPanel"
         CampaignPanel.Size = New Size(286, 329)
         CampaignPanel.TabIndex = 6
@@ -190,6 +199,7 @@ Partial Class DashboardForm
         ' Label11
         ' 
         Label11.AutoSize = True
+        Label11.BackColor = Color.Transparent
         Label11.Location = New Point(16, 220)
         Label11.Name = "Label11"
         Label11.Size = New Size(81, 15)
@@ -199,6 +209,7 @@ Partial Class DashboardForm
         ' Label10
         ' 
         Label10.AutoSize = True
+        Label10.BackColor = Color.Transparent
         Label10.Location = New Point(6, 203)
         Label10.Name = "Label10"
         Label10.Size = New Size(105, 15)
@@ -208,6 +219,7 @@ Partial Class DashboardForm
         ' Label9
         ' 
         Label9.AutoSize = True
+        Label9.BackColor = Color.Transparent
         Label9.Location = New Point(195, 140)
         Label9.Name = "Label9"
         Label9.Size = New Size(27, 15)
@@ -217,7 +229,8 @@ Partial Class DashboardForm
         ' Label8
         ' 
         Label8.AutoSize = True
-        Label8.Location = New Point(44, 140)
+        Label8.BackColor = Color.Transparent
+        Label8.Location = New Point(66, 140)
         Label8.Name = "Label8"
         Label8.Size = New Size(31, 15)
         Label8.TabIndex = 14
@@ -226,6 +239,7 @@ Partial Class DashboardForm
         ' Label7
         ' 
         Label7.AutoSize = True
+        Label7.BackColor = Color.Transparent
         Label7.Location = New Point(30, 106)
         Label7.Name = "Label7"
         Label7.Size = New Size(51, 15)
@@ -235,6 +249,7 @@ Partial Class DashboardForm
         ' Label6
         ' 
         Label6.AutoSize = True
+        Label6.BackColor = Color.Transparent
         Label6.Location = New Point(30, 62)
         Label6.Name = "Label6"
         Label6.Size = New Size(67, 15)
@@ -244,15 +259,16 @@ Partial Class DashboardForm
         ' Label5
         ' 
         Label5.AutoSize = True
-        Label5.Location = New Point(3, 16)
+        Label5.BackColor = Color.Transparent
+        Label5.Location = New Point(9, 16)
         Label5.Name = "Label5"
-        Label5.Size = New Size(103, 15)
+        Label5.Size = New Size(104, 15)
         Label5.TabIndex = 11
         Label5.Text = "Title Of Campaign"
         ' 
         ' SaveCampaignButton
         ' 
-        SaveCampaignButton.Font = New Font("Unispace", 11.9999981F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        SaveCampaignButton.Font = New Font("Microsoft Sans Serif", 11.9999981F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         SaveCampaignButton.Location = New Point(30, 250)
         SaveCampaignButton.Name = "SaveCampaignButton"
         SaveCampaignButton.Size = New Size(230, 40)
@@ -306,7 +322,7 @@ Partial Class DashboardForm
         ' CampaignsFlowPanel
         ' 
         CampaignsFlowPanel.AutoScroll = True
-        CampaignsFlowPanel.BackColor = SystemColors.ActiveCaption
+        CampaignsFlowPanel.BackColor = Color.FromArgb(CByte(120), CByte(150), CByte(190))
         CampaignsFlowPanel.Location = New Point(734, 101)
         CampaignsFlowPanel.Name = "CampaignsFlowPanel"
         CampaignsFlowPanel.Size = New Size(529, 419)
@@ -316,7 +332,7 @@ Partial Class DashboardForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        BackColor = SystemColors.ActiveCaption
+        BackColor = Color.FromArgb(CByte(120), CByte(140), CByte(186))
         ClientSize = New Size(1275, 532)
         Controls.Add(CampaignsFlowPanel)
         Controls.Add(CampaignPanel)
