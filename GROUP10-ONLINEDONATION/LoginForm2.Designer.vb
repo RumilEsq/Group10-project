@@ -46,7 +46,7 @@ Partial Class LoginForm2
         ' 
         ' UsernameLabel
         ' 
-        UsernameLabel.Location = New Point(505, 177)
+        UsernameLabel.Location = New Point(112, 181)
         UsernameLabel.Name = "UsernameLabel"
         UsernameLabel.Size = New Size(220, 23)
         UsernameLabel.TabIndex = 0
@@ -55,7 +55,7 @@ Partial Class LoginForm2
         ' 
         ' PasswordLabel
         ' 
-        PasswordLabel.Location = New Point(505, 240)
+        PasswordLabel.Location = New Point(112, 244)
         PasswordLabel.Name = "PasswordLabel"
         PasswordLabel.Size = New Size(220, 23)
         PasswordLabel.TabIndex = 2
@@ -64,14 +64,14 @@ Partial Class LoginForm2
         ' 
         ' UsernameTextBox
         ' 
-        UsernameTextBox.Location = New Point(505, 203)
+        UsernameTextBox.Location = New Point(112, 207)
         UsernameTextBox.Name = "UsernameTextBox"
         UsernameTextBox.Size = New Size(220, 23)
         UsernameTextBox.TabIndex = 1
         ' 
         ' PasswordTextBox
         ' 
-        PasswordTextBox.Location = New Point(505, 266)
+        PasswordTextBox.Location = New Point(112, 270)
         PasswordTextBox.Name = "PasswordTextBox"
         PasswordTextBox.PasswordChar = "*"c
         PasswordTextBox.Size = New Size(220, 23)
@@ -79,7 +79,7 @@ Partial Class LoginForm2
         ' 
         ' OK
         ' 
-        OK.Location = New Point(505, 313)
+        OK.Location = New Point(112, 317)
         OK.Name = "OK"
         OK.Size = New Size(94, 36)
         OK.TabIndex = 4
@@ -89,7 +89,7 @@ Partial Class LoginForm2
         ' Cancel
         ' 
         Cancel.DialogResult = DialogResult.Cancel
-        Cancel.Location = New Point(631, 313)
+        Cancel.Location = New Point(238, 317)
         Cancel.Name = "Cancel"
         Cancel.Size = New Size(94, 36)
         Cancel.TabIndex = 5
@@ -99,7 +99,7 @@ Partial Class LoginForm2
         ' LoginText
         ' 
         LoginText.Font = New Font("Sitka Small", 27.75F, FontStyle.Bold)
-        LoginText.Location = New Point(558, 88)
+        LoginText.Location = New Point(165, 92)
         LoginText.Name = "LoginText"
         LoginText.Size = New Size(139, 78)
         LoginText.TabIndex = 6
@@ -108,7 +108,7 @@ Partial Class LoginForm2
         ' 
         ' RegisterButton
         ' 
-        RegisterButton.Location = New Point(505, 389)
+        RegisterButton.Location = New Point(112, 393)
         RegisterButton.Name = "RegisterButton"
         RegisterButton.Size = New Size(220, 39)
         RegisterButton.TabIndex = 6
@@ -118,7 +118,7 @@ Partial Class LoginForm2
         ' PictureBox1
         ' 
         PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
-        PictureBox1.Location = New Point(1180, -254)
+        PictureBox1.Location = New Point(388, -231)
         PictureBox1.Name = "PictureBox1"
         PictureBox1.Size = New Size(102, 782)
         PictureBox1.TabIndex = 7
@@ -130,7 +130,7 @@ Partial Class LoginForm2
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = Cancel
-        ClientSize = New Size(1280, 527)
+        ClientSize = New Size(481, 527)
         Controls.Add(PictureBox1)
         Controls.Add(RegisterButton)
         Controls.Add(LoginText)
