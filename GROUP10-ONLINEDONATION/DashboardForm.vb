@@ -1,15 +1,13 @@
 ﻿Imports System.Configuration
 Imports System.Data.SqlClient
-Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class DashboardForm
     Public Property LoggedInUserID As Integer
 
     Private Sub DashboardForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        DonatePanel.Visible = False
-        CampaignPanel.Visible = False
         LoadCampaigns()
         LoadPaymentMethods()
+        LoadUserCampaigns()
         LoadCampaignProgress()
     End Sub
 
@@ -43,11 +41,6 @@ Public Class DashboardForm
         End Using
     End Sub
 
-
-    Private Sub DonateButton_Click(sender As Object, e As EventArgs) Handles DonateButton.Click
-        DonatePanel.Visible = Not DonatePanel.Visible
-    End Sub
-
     Private Sub SubmitDonationButton_Click(sender As Object, e As EventArgs) Handles SubmitDonationButton.Click
         If CampaignComboBox.SelectedItem Is Nothing OrElse PaymentMethodComboBox.SelectedItem Is Nothing OrElse AmountTextBox.Text.Trim = "" Then
             MessageBox.Show("Please complete all donation fields.")
@@ -76,7 +69,6 @@ Public Class DashboardForm
                 cmd.ExecuteNonQuery()
                 MessageBox.Show("Thank you for your donation!")
                 AmountTextBox.Clear()
-                DonatePanel.Visible = False
                 LoadCampaignProgress()
             Catch ex As Exception
                 MessageBox.Show("Error processing donation: " & ex.Message)
@@ -89,11 +81,6 @@ Public Class DashboardForm
         Me.Close()
     End Sub
 
-    Private Sub CreateCampaignButton_Click(sender As Object, e As EventArgs) Handles CreateCampaignButton.Click
-        CampaignPanel.Visible = True
-        LoadUserCampaigns()
-    End Sub
-
     Private Sub SaveCampaignButton_Click(sender As Object, e As EventArgs) Handles SaveCampaignButton.Click
         Dim title = TitleTextBox.Text.Trim()
         Dim description = DescriptionTextBox.Text.Trim()
@@ -103,7 +90,7 @@ Public Class DashboardForm
         Dim endDate = EndDatePicker.Value
 
         If title = "" OrElse goalAmount <= 0 Then
-            MessageBox.Show("Please enter valid title and goal amount.")
+            MessageBox.Show("Please enter a valid title and goal amount.")
             Return
         End If
 
@@ -111,41 +98,29 @@ Public Class DashboardForm
         Using conn As New SqlConnection(connStr)
             conn.Open()
 
-            If CampaignComboBox.SelectedItem IsNot Nothing Then
-                Dim selectedCampaign As KeyValuePair(Of Integer, String) = DirectCast(CampaignComboBox.SelectedItem, KeyValuePair(Of Integer, String))
-                Dim updateQuery = "UPDATE campaigns SET title=@Title, description=@Description, goal_amount=@GoalAmount, start_date=@StartDate, end_date=@EndDate WHERE campaign_id=@CampaignID"
-                Using cmd As New SqlCommand(updateQuery, conn)
-                    cmd.Parameters.AddWithValue("@Title", title)
-                    cmd.Parameters.AddWithValue("@Description", description)
-                    cmd.Parameters.AddWithValue("@GoalAmount", goalAmount)
-                    cmd.Parameters.AddWithValue("@StartDate", startDate)
-                    cmd.Parameters.AddWithValue("@EndDate", endDate)
-                    cmd.Parameters.AddWithValue("@CampaignID", selectedCampaign.Key)
-                    cmd.ExecuteNonQuery()
-                End Using
-                MessageBox.Show("Campaign updated successfully.")
-            Else
-                Dim insertQuery = "INSERT INTO campaigns (user_id, title, description, goal_amount, start_date, end_date, current_amount, is_active) VALUES (@UserID, @Title, @Description, @GoalAmount, @StartDate, @EndDate, 0, 1)"
-                Using cmd As New SqlCommand(insertQuery, conn)
-                    cmd.Parameters.AddWithValue("@UserID", LoggedInUserID)
-                    cmd.Parameters.AddWithValue("@Title", title)
-                    cmd.Parameters.AddWithValue("@Description", description)
-                    cmd.Parameters.AddWithValue("@GoalAmount", goalAmount)
-                    cmd.Parameters.AddWithValue("@StartDate", startDate)
-                    cmd.Parameters.AddWithValue("@EndDate", endDate)
-                    cmd.ExecuteNonQuery()
-                End Using
-                MessageBox.Show("Campaign created successfully.")
-            End If
+            Dim insertQuery = "INSERT INTO campaigns (user_id, title, description, goal_amount, start_date, end_date, current_amount, is_active) 
+                           VALUES (@UserID, @Title, @Description, @GoalAmount, @StartDate, @EndDate, 0, 1)"
+            Using cmd As New SqlCommand(insertQuery, conn)
+                cmd.Parameters.AddWithValue("@UserID", LoggedInUserID)
+                cmd.Parameters.AddWithValue("@Title", title)
+                cmd.Parameters.AddWithValue("@Description", description)
+                cmd.Parameters.AddWithValue("@GoalAmount", goalAmount)
+                cmd.Parameters.AddWithValue("@StartDate", startDate)
+                cmd.Parameters.AddWithValue("@EndDate", endDate)
+                cmd.ExecuteNonQuery()
+            End Using
 
-            LoadUserCampaigns()
+            MessageBox.Show("Campaign created successfully.")
+            TitleTextBox.Clear()
+            DescriptionTextBox.Clear()
+            GoalAmountTextBox.Clear()
+
             LoadCampaigns()
             LoadCampaignProgress()
         End Using
     End Sub
 
     Private Sub LoadUserCampaigns()
-        CampaignComboBox.Items.Clear()
 
         Dim connStr = ConfigurationManager.ConnectionStrings("MyConnectionString").ConnectionString
         Using conn As New SqlConnection(connStr)
@@ -153,16 +128,7 @@ Public Class DashboardForm
             Dim cmd = New SqlCommand("SELECT campaign_id, title FROM campaigns WHERE user_id = @UserID", conn)
             cmd.Parameters.AddWithValue("@UserID", LoggedInUserID)
 
-            Using reader = cmd.ExecuteReader()
-                While reader.Read()
-                    CampaignComboBox.Items.Add(New KeyValuePair(Of Integer, String)(reader("campaign_id"), reader("title").ToString()))
-                End While
-            End Using
         End Using
-
-        If CampaignComboBox.Items.Count > 0 Then
-            CampaignComboBox.SelectedIndex = CampaignComboBox.Items.Count - 1
-        End If
     End Sub
 
     Private Sub LoadCampaignProgress()
@@ -171,7 +137,7 @@ Public Class DashboardForm
         Dim connStr = ConfigurationManager.ConnectionStrings("MyConnectionString").ConnectionString
         Using conn As New SqlConnection(connStr)
             conn.Open()
-            Dim query = "SELECT title, goal_amount, current_amount, start_date, end_date FROM campaigns"
+            Dim query = "SELECT campaign_id, title, goal_amount, current_amount, start_date, end_date FROM campaigns WHERE current_amount < goal_amount AND end_date >= GETDATE()"
             Using cmd As New SqlCommand(query, conn)
                 Using reader = cmd.ExecuteReader()
                     While reader.Read()
@@ -205,7 +171,8 @@ Public Class DashboardForm
                             .Maximum = 100,
                             .Value = Math.Min(100, CInt((Convert.ToDecimal(reader("current_amount")) / Convert.ToDecimal(reader("goal_amount"))) * 100)),
                             .Width = 350,
-                            .Height = 20
+                            .Height = 20,
+                            .ForeColor = Color.Blue
                         }
 
                         panel.Controls.Add(titleLabel)
@@ -225,11 +192,5 @@ Public Class DashboardForm
         End Using
     End Sub
 
-    Private Sub DonatePanel_Paint(sender As Object, e As PaintEventArgs) Handles DonatePanel.Paint
 
-    End Sub
-
-    Private Sub PaymentMethodComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PaymentMethodComboBox.SelectedIndexChanged
-
-    End Sub
 End Class

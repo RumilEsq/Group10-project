@@ -28,6 +28,7 @@ Partial Class a
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
+        BackColor = Color.DodgerBlue
         Name = "a"
         Size = New Size(399, 365)
         ResumeLayout(False)

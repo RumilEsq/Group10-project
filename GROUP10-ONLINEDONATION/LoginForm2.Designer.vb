@@ -26,7 +26,7 @@ Partial Class LoginForm2
     Friend WithEvents OK As System.Windows.Forms.Button
     Friend WithEvents Cancel As System.Windows.Forms.Button
     Friend WithEvents LoginText As System.Windows.Forms.Label
-
+    Friend WithEvents Picturebox1 As System.Windows.Forms.PictureBox
 
     ' Initialize form and controls
     <System.Diagnostics.DebuggerStepThrough()>
@@ -56,8 +56,7 @@ Partial Class LoginForm2
         ' 
         ' UsernameLabel
         ' 
-        UsernameLabel.Location = New Point(112, 181)
-        UsernameLabel.Location = New Point(108, 197)
+        UsernameLabel.Location = New Point(106, 233)
         UsernameLabel.Name = "UsernameLabel"
         UsernameLabel.Size = New Size(220, 23)
         UsernameLabel.TabIndex = 0
@@ -66,8 +65,7 @@ Partial Class LoginForm2
         ' 
         ' PasswordLabel
         ' 
-        PasswordLabel.Location = New Point(112, 244)
-        PasswordLabel.Location = New Point(108, 249)
+        PasswordLabel.Location = New Point(106, 293)
         PasswordLabel.Name = "PasswordLabel"
         PasswordLabel.Size = New Size(220, 23)
         PasswordLabel.TabIndex = 2
@@ -76,19 +74,17 @@ Partial Class LoginForm2
         ' 
         ' UsernameTextBox
         ' 
-        UsernameTextBox.Location = New Point(112, 207)
         UsernameTextBox.BackColor = SystemColors.Window
         UsernameTextBox.BorderStyle = BorderStyle.FixedSingle
-        UsernameTextBox.Location = New Point(108, 223)
+        UsernameTextBox.Location = New Point(106, 259)
         UsernameTextBox.Name = "UsernameTextBox"
         UsernameTextBox.Size = New Size(220, 23)
         UsernameTextBox.TabIndex = 1
         ' 
         ' PasswordTextBox
         ' 
-        PasswordTextBox.Location = New Point(112, 270)
         PasswordTextBox.BorderStyle = BorderStyle.FixedSingle
-        PasswordTextBox.Location = New Point(108, 275)
+        PasswordTextBox.Location = New Point(106, 319)
         PasswordTextBox.Name = "PasswordTextBox"
         PasswordTextBox.PasswordChar = "*"c
         PasswordTextBox.Size = New Size(220, 23)
@@ -96,9 +92,8 @@ Partial Class LoginForm2
         ' 
         ' OK
         ' 
-        OK.Location = New Point(112, 317)
-        OK.BackColor = Color.FromArgb(CByte(128), CByte(179), CByte(255))
-        OK.Location = New Point(108, 317)
+        OK.BackColor = Color.Transparent
+        OK.Location = New Point(106, 348)
         OK.Name = "OK"
         OK.Size = New Size(94, 36)
         OK.TabIndex = 4
@@ -108,8 +103,7 @@ Partial Class LoginForm2
         ' Cancel
         ' 
         Cancel.DialogResult = DialogResult.Cancel
-        Cancel.Location = New Point(238, 317)
-        Cancel.Location = New Point(234, 317)
+        Cancel.Location = New Point(232, 348)
         Cancel.Name = "Cancel"
         Cancel.Size = New Size(94, 36)
         Cancel.TabIndex = 5
@@ -118,10 +112,8 @@ Partial Class LoginForm2
         ' 
         ' LoginText
         ' 
-        LoginText.Font = New Font("Sitka Small", 27.75F, FontStyle.Bold)
-        LoginText.Location = New Point(165, 92)
-        LoginText.Font = New Font("Arial Black", 36.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        LoginText.Location = New Point(115, 109)
+        LoginText.Font = New Font("Arial Black", 36F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LoginText.Location = New Point(113, 140)
         LoginText.Name = "LoginText"
         LoginText.Size = New Size(213, 78)
         LoginText.TabIndex = 6
@@ -130,8 +122,7 @@ Partial Class LoginForm2
         ' 
         ' RegisterButton
         ' 
-        RegisterButton.Location = New Point(112, 393)
-        RegisterButton.Location = New Point(108, 395)
+        RegisterButton.Location = New Point(106, 395)
         RegisterButton.Name = "RegisterButton"
         RegisterButton.Size = New Size(220, 39)
         RegisterButton.TabIndex = 6
@@ -143,15 +134,15 @@ Partial Class LoginForm2
         Panel2.BackColor = Color.Transparent
         Panel2.BackgroundImage = CType(resources.GetObject("Panel2.BackgroundImage"), Image)
         Panel2.BorderStyle = BorderStyle.FixedSingle
-        Panel2.Controls.Add(IconPictureBox1)
         Panel2.Controls.Add(RegisterButton)
+        Panel2.Controls.Add(IconPictureBox1)
+        Panel2.Controls.Add(Cancel)
         Panel2.Controls.Add(LoginText)
         Panel2.Controls.Add(OK)
-        Panel2.Controls.Add(Cancel)
         Panel2.Controls.Add(UsernameTextBox)
-        Panel2.Controls.Add(UsernameLabel)
-        Panel2.Controls.Add(PasswordLabel)
         Panel2.Controls.Add(PasswordTextBox)
+        Panel2.Controls.Add(PasswordLabel)
+        Panel2.Controls.Add(UsernameLabel)
         Panel2.Location = New Point(336, 27)
         Panel2.Name = "Panel2"
         Panel2.Size = New Size(426, 478)
@@ -191,12 +182,6 @@ Partial Class LoginForm2
         ' 
         ' Panel4
         ' 
-        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
-        PictureBox1.Location = New Point(388, -231)
-        PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(102, 782)
-        PictureBox1.TabIndex = 7
-        PictureBox1.TabStop = False
         Panel4.BackColor = Color.White
         Panel4.BackgroundImage = CType(resources.GetObject("Panel4.BackgroundImage"), Image)
         Panel4.Location = New Point(808, 62)
@@ -252,20 +237,10 @@ Partial Class LoginForm2
         ' LoginForm2
         ' 
         AcceptButton = OK
-        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(120), CByte(140), CByte(186))
         CancelButton = Cancel
-        ClientSize = New Size(481, 527)
-        Controls.Add(PictureBox1)
-        Controls.Add(RegisterButton)
-        Controls.Add(LoginText)
-        Controls.Add(Cancel)
-        Controls.Add(OK)
-        Controls.Add(PasswordTextBox)
-        Controls.Add(UsernameTextBox)
-        Controls.Add(PasswordLabel)
-        Controls.Add(UsernameLabel)
         ClientSize = New Size(1040, 529)
         Controls.Add(Panel9)
         Controls.Add(Panel8)

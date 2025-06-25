@@ -70,4 +70,8 @@ Public Class LoginForm2
     Private Sub LoginText_Click(sender As Object, e As EventArgs) Handles LoginText.Click
 
     End Sub
+
+    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
+
+    End Sub
 End Class
