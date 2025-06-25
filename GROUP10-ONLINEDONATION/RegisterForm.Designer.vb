@@ -19,6 +19,7 @@ Partial Class RegisterForm
     ' Required by Windows Form Designer
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(RegisterForm))
         FullNameTextBox = New TextBox()
         EmailTextBox = New TextBox()
         PasswordTextBox = New TextBox()
@@ -80,7 +81,8 @@ Partial Class RegisterForm
         ' RegisterForm
         ' 
         AcceptButton = RegisterButton
-        ClientSize = New Size(289, 278)
+        BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
+        ClientSize = New Size(280, 249)
         Controls.Add(FullNameTextBox)
         Controls.Add(EmailTextBox)
         Controls.Add(PasswordTextBox)
@@ -88,6 +90,7 @@ Partial Class RegisterForm
         Controls.Add(RegisterButton)
         Controls.Add(CancelButton)
         Name = "RegisterForm"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "Register"
         ResumeLayout(False)
         PerformLayout()

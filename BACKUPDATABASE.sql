@@ -7,14 +7,15 @@ CREATE TABLE roles (
 );
 
 CREATE TABLE users (
-    user_id INT PRIMARY KEY,
+   user_id INT IDENTITY(1,1) PRIMARY KEY
     role_id INT NOT NULL,
     full_name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    password_hash VARCHAR(200) NOT NULL,
-    create_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    password VARCHAR(100) NOT NULL,              
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (role_id) REFERENCES roles(role_id)
 );
+
 
 CREATE TABLE beneficiaries (
     beneficiary_id INT PRIMARY KEY,
@@ -43,7 +44,7 @@ CREATE TABLE payment_methods (
 );
 
 CREATE TABLE donations (
-    donation_id INT PRIMARY KEY,
+    donation_id INT IDENTITY(1,1) PRIMARY KEY ,
     user_id INT NOT NULL,
     campaign_id INT NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
