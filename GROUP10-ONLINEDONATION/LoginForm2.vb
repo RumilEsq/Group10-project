@@ -54,24 +54,4 @@ Public Class LoginForm2
         Dim regForm As New RegisterForm()
         regForm.ShowDialog()
     End Sub
-
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub UsernameLabel_Click(sender As Object, e As EventArgs) Handles UsernameLabel.Click
-
-    End Sub
-
-    Private Sub PasswordLabel_Click(sender As Object, e As EventArgs) Handles PasswordLabel.Click
-
-    End Sub
-
-    Private Sub LoginText_Click(sender As Object, e As EventArgs) Handles LoginText.Click
-
-    End Sub
-
-    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
-
-    End Sub
 End Class
