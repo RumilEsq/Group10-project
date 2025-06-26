@@ -17,13 +17,6 @@ CREATE TABLE users (
 );
 
 
-CREATE TABLE beneficiaries (
-    beneficiary_id INT PRIMARY KEY,
-    user_id INT NOT NULL,
-    bio TEXT,
-    needs TEXT,
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
-);
 
 CREATE TABLE campaigns (
     campaign_id INT PRIMARY KEY,
@@ -55,23 +48,3 @@ CREATE TABLE donations (
     FOREIGN KEY (payment_method_id) REFERENCES payment_methods(payment_method_id)
 );
 
-
-CREATE TABLE campaign_updates (
-    update_id INT PRIMARY KEY,
-    campaign_id INT NOT NULL,
-    update_text TEXT,
-    update_date DATETIME DEFAULT GETDATE(),
-    FOREIGN KEY (campaign_id) REFERENCES campaigns(campaign_id)
-);
-
-
-CREATE TABLE feedback (
-    feedback_id INT PRIMARY KEY,
-    user_id INT NOT NULL,
-    campaign_id INT NOT NULL,
-    rating INT CHECK (rating BETWEEN 1 AND 5),
-    comment TEXT,
-    feedback_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (campaign_id) REFERENCES campaigns(campaign_id)
-);
