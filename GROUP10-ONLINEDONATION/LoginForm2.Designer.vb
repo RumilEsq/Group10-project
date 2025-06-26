@@ -156,7 +156,7 @@ Partial Class LoginForm2
         IconPictureBox1.IconColor = SystemColors.ActiveCaptionText
         IconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto
         IconPictureBox1.IconSize = 92
-        IconPictureBox1.Location = New Point(178, 34)
+        IconPictureBox1.Location = New Point(174, 49)
         IconPictureBox1.Name = "IconPictureBox1"
         IconPictureBox1.Size = New Size(92, 94)
         IconPictureBox1.TabIndex = 10
