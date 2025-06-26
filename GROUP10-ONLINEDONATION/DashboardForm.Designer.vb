@@ -277,7 +277,7 @@ Partial Class DashboardForm
         ' CampaignsFlowPanel
         ' 
         CampaignsFlowPanel.AutoScroll = True
-        CampaignsFlowPanel.BackColor = Color.FromArgb(CByte(120), CByte(150), CByte(190))
+        CampaignsFlowPanel.BackColor = Color.Transparent
         CampaignsFlowPanel.Location = New Point(734, 101)
         CampaignsFlowPanel.Name = "CampaignsFlowPanel"
         CampaignsFlowPanel.Size = New Size(529, 419)
